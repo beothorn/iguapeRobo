@@ -67,6 +67,21 @@
     }
 
     setInterval(toggleBlink, 6000); // Maybe randomly blink every interval of 6 seconds
+
+    // Fullscreen handling for mobile touch
+    document.addEventListener('touchstart', toggleFullscreen);
+
+    function toggleFullscreen() {
+      var elem = document.documentElement;
+
+      if (!document.fullscreenElement) {
+        elem.requestFullscreen().catch(err => {
+          console.log(`Error attempting to enable full-screen mode: ${err.message}`);
+        });
+      } else {
+        document.exitFullscreen();
+      }
+    }
   </script>
 </body>
 </html>
