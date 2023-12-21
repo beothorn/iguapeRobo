@@ -19,16 +19,19 @@
       background-color: #00ff00; /* Green color */
       border-radius: 36% 36% 36% 36%; /* Oval shape */
       position: relative;
-      left: 25px; /* Adjust for the right eye */
       animation: blink-animation 0.5s;
     }
 
     .left {
-      left: -10px;
+      left: -65px;
     }
 
     .right {
-      left: 25px;
+      left: 65px;
+    }
+
+    .normal-eyes {
+      animation: none; /* Disable animation by default */
     }
 
     @keyframes blink-animation {
@@ -53,8 +56,14 @@
       const shouldBlink = (Math.random() < 0.5);
 
       if (shouldBlink) {
-        // TODO: set blink animation here
-      }
+        leftEye.classList.add('normal-eyes');
+        rightEye.classList.add('normal-eyes');
+
+            setTimeout(() => {
+            leftEye.classList.remove('normal-eyes');
+            rightEye.classList.remove('normal-eyes');
+            }, 500); // Remove the 'blink' class after 500 milliseconds
+        }
     }
 
     setInterval(toggleBlink, 6000); // Maybe randomly blink every interval of 6 seconds
