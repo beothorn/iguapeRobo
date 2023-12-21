@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #333333;
+    }
+
+    .eye {
+      width: 169px;
+      height: 414px;
+      background-color: #00ff00; /* Green color */
+      border-radius: 36% 36% 36% 36%; /* Oval shape */
+      position: relative;
+      left: 25px; /* Adjust for the right eye */
+      animation: blink-animation 0.5s;
+    }
+
+    .left {
+      left: -10px;
+    }
+
+    .right {
+      left: 25px;
+    }
+
+    @keyframes blink-animation {
+      0%, 100% {
+        transform: scaleY(1);
+      }
+      50% {
+        transform: scaleY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="eye left" id="left-eye"></div>
+  <div class="eye right" id="right-eye"></div>
+
+  <script>
+    function toggleBlink() {
+      var leftEye = document.getElementById('left-eye');
+      var rightEye = document.getElementById('right-eye');
+
+      const shouldBlink = (Math.random() < 0.5);
+
+      if (shouldBlink) {
+        // TODO: set blink animation here
+      }
+    }
+
+    setInterval(toggleBlink, 6000); // Maybe randomly blink every interval of 6 seconds
+  </script>
+</body>
+</html>
