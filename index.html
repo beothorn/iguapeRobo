@@ -44,10 +44,10 @@
       left: 65px;
     }
 
-    .blink-left{
+    .blink-eye-left{
       animation: blink-anim 0.5s;
     }
-    .blink-right{
+    .blink-eye-right{
       animation: blink-anim 0.5s;
     }
     @keyframes blink-anim{
@@ -59,7 +59,7 @@
       }
     }
 
-    .look-sideways-left{
+    .look-sideways-eye-left{
       animation: look-sideways-left-anim 2s;
     }
     @keyframes look-sideways-left-anim{
@@ -67,7 +67,7 @@
       25% { left:135px; } 
       75% { left: -265px; } 
     }
-    .look-sideways-right{
+    .look-sideways-eye-right{
       animation: look-sideways-right-anim 2s;
     }
     @keyframes look-sideways-right-anim{
@@ -76,7 +76,7 @@
       75% { left:-135px; } 
     }
     
-    .angry-eyebow-left{
+    .angry-eyebrow-left{
       animation: drop-eyebrow-angry-left-anim 3s;
     }
     @keyframes drop-eyebrow-angry-left-anim{
@@ -89,7 +89,7 @@
         transform: rotate(30deg); 
       } 
     }
-    .angry-eyebow-right{
+    .angry-eyebrow-right{
       animation: drop-eyebrow-angry-right-anim 3s;
     }
     @keyframes drop-eyebrow-angry-right-anim{
@@ -113,7 +113,7 @@
   </div>
   <script>
 
-    const animations =['blink', 'look-sideways', 'angry-eyebow'];
+    const animations =['blink', 'look-sideways', 'angry'];
 
     function animateAll(animationName){
       console.log("Animate "+animationName);
@@ -124,10 +124,10 @@
 
       removeAllOnEnd();
 
-      leftEye.classList.add(animationName+'-left');
-      leftEyebrow.classList.add(animationName+'-left');
-      rightEye.classList.add(animationName+'-right');
-      rightEyebrow.classList.add(animationName+'-right');
+      leftEye.classList.add(animationName+'-eye-left');
+      leftEyebrow.classList.add(animationName+'-eyebrow-left');
+      rightEye.classList.add(animationName+'-eye-right');
+      rightEyebrow.classList.add(animationName+'-eyebrow-right');
     }
 
     function removeAnimation(animationName){
@@ -137,10 +137,10 @@
       const leftEyebrow = document.getElementById('left-eyebrow');
       const rightEyebrow = document.getElementById('right-eyebrow');
 
-      leftEye.classList.remove(animationName+'-left');
-      leftEyebrow.classList.remove(animationName+'-left');
-      rightEye.classList.remove(animationName+'-right');
-      rightEyebrow.classList.remove(animationName+'-right');
+      leftEye.classList.remove(animationName+'-eye-left');
+      leftEyebrow.classList.remove(animationName+'-eyebrow-left');
+      rightEye.classList.remove(animationName+'-eye-right');
+      rightEyebrow.classList.remove(animationName+'-eyebrow-right');
     }
 
     function removeAll(){
@@ -164,7 +164,7 @@
       animateAll("blink");
     }
     function angry(){
-      animateAll("angry-eyebow");
+      animateAll("angry");
     }
     function lookSideways(){
       animateAll("look-sideways");
