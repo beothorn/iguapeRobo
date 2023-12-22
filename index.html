@@ -12,29 +12,46 @@
       margin: 0;
       background-color: #000;
     }
-
     .eye {
       width: 169px;
       height: 414px;
       background-color: #00ff00;
       border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
       position: relative;
-      animation: blink-animation 0.5s;
       box-shadow: 0 0 7px 3px #00ff00;
+      animation: none;
     }
-
+    .blink{
+      animation: blink-animation 0.5s;
+    }
+    .eyebrow{
+      width: 276px;
+      height: 100px;
+      background:#000;
+      animation: none;
+    }
+    .angry-eyebow-left{
+      animation: drop-eyebrow-angry-left 3s;
+    }
+    .angry-eyebow-right{
+      animation: drop-eyebrow-angry-right 3s;
+    }
+    .eyebrow-left{
+      position: relative;
+      left: -43px;
+      top: -114px; 
+    }
+    .eyebrow-right{
+      position: relative;
+      left: -65px;
+      top: -114px;
+    }
     .left {
       left: -65px;
     }
-
     .right {
       left: 65px;
     }
-
-    .normal-eyes {
-      animation: none; /* Disable animation by default */
-    }
-
     @keyframes blink-animation {
       0%, 100% {
         transform: scaleY(1);
@@ -43,46 +60,82 @@
         transform: scaleY(0);
       }
     }
+    @keyframes drop-eyebrow-angry-left {
+      0%, 100% {
+        top: -114px;
+        transform: rotate(0deg); 
+      } 
+      50% {
+        top:0px;
+        transform: rotate(30deg); 
+      } 
+    }
+    @keyframes drop-eyebrow-angry-right {
+      0%, 100% {
+        top: -114px;
+        transform: rotate(0deg); 
+      } 
+      50% {
+        top:0px;
+        transform: rotate(-30deg); 
+      } 
+    }
   </style>
 </head>
 <body>
-  <div class="eye left" id="left-eye"></div>
-  <div class="eye right" id="right-eye"></div>
-
+  <div class="eye left" id="left-eye">
+    <div class="eyebrow eyebrow-left" id="left-eyebrow"></div>
+  </div>
+  <div class="eye right" id="right-eye">
+    <div class="eyebrow eyebrow-right" id="right-eyebrow"></div>
+  </div>
   <script>
-    function toggleBlink() {
-      var leftEye = document.getElementById('left-eye');
-      var rightEye = document.getElementById('right-eye');
-
-      const shouldBlink = (Math.random() < 0.5);
-
-      if (shouldBlink) {
-        leftEye.classList.add('normal-eyes');
-        rightEye.classList.add('normal-eyes');
-
-            setTimeout(() => {
-            leftEye.classList.remove('normal-eyes');
-            rightEye.classList.remove('normal-eyes');
-            }, 500); // Remove the 'blink' class after 500 milliseconds
-        }
+    // addEventListener("animationend", (event) => {});
+    function blink(){
+      const leftEye = document.getElementById('left-eye');
+      const rightEye = document.getElementById('right-eye');
+      leftEye.classList.add('blink');
+      rightEye.classList.add('blink');
+      setTimeout(() => {
+        leftEye.classList.remove('blink');
+        rightEye.classList.remove('blink');
+      }, 500);
+    }
+    function angry(){
+      const leftEyebrow = document.getElementById('left-eyebrow');
+      const righEyebrow = document.getElementById('right-eyebrow');
+      leftEyebrow.classList.add('angry-eyebow-left');
+      righEyebrow.classList.add('angry-eyebow-right');
+      setTimeout(() => {
+        leftEyebrow.classList.remove('angry-eyebow-left');
+        righEyebrow.classList.remove('angry-eyebow-right');
+      }, 3000);
     }
 
-    setInterval(toggleBlink, 6000); // Maybe randomly blink every interval of 6 seconds
-
-    // Fullscreen handling for mobile touch
-    document.addEventListener('touchstart', toggleFullscreen);
-
-    function toggleFullscreen() {
-      var elem = document.documentElement;
-
-      if (!document.fullscreenElement) {
-        elem.requestFullscreen().catch(err => {
-          console.log(`Error attempting to enable full-screen mode: ${err.message}`);
-        });
-      } else {
-        document.exitFullscreen();
+    function toggleAnimation(){
+      console.log("Random animation");
+      const randomValue = Math.random();
+      if(randomValue < 0.2){
+        blink();
+        console.log("blink");
+        return;
       }
+      if(randomValue < 0.4){
+        angry();
+        console.log("angry");
+        return;
+      }
+      console.log("no animation");
     }
+
+    setInterval(toggleAnimation, 4000);
+    document.addEventListener('touchstart', () => {
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      } else {
+        document.documentElement.requestFullscreen();
+      }
+    });
   </script>
 </body>
 </html>
