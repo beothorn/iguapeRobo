@@ -23,19 +23,17 @@
     }
     .eyebrow{
       width: 276px;
-      height: 100px;
+      height: 200px;
       background:#000;
       animation: none;
+      position: relative;
+      top: -205px;
     }
     .eyebrow-left{
-      position: relative;
-      left: -43px;
-      top: -114px; 
+      left: -43px; 
     }
     .eyebrow-right{
-      position: relative;
       left: -65px;
-      top: -114px;
     }
     .left {
       left: -65px;
@@ -81,11 +79,11 @@
     }
     @keyframes drop-eyebrow-angry-left-anim{
       0%, 100% {
-        top: -114px;
+        top: -205px;
         transform: rotate(0deg); 
       } 
       50% {
-        top:0px;
+        top:-150px;
         transform: rotate(30deg); 
       } 
     }
@@ -94,12 +92,39 @@
     }
     @keyframes drop-eyebrow-angry-right-anim{
       0%, 100% {
-        top: -114px;
+        top: -205px;
         transform: rotate(0deg); 
       } 
       50% {
-        top:0px;
+        top:-150px;
         transform: rotate(-30deg); 
+      } 
+    }
+
+    .sad-eyebrow-left{
+      animation: drop-eyebrow-sad-left-anim 3s;
+    }
+    @keyframes drop-eyebrow-sad-left-anim{
+      0%, 100% {
+        top: -205px;
+        transform: rotate(0deg); 
+      } 
+      50% {
+        top:-150px;
+        transform: rotate(-20deg); 
+      } 
+    }
+    .sad-eyebrow-right{
+      animation: drop-eyebrow-sad-right-anim 3s;
+    }
+    @keyframes drop-eyebrow-sad-right-anim{
+      0%, 100% {
+        top: -205px;
+        transform: rotate(0deg); 
+      } 
+      50% {
+        top:-150px;
+        transform: rotate(20deg); 
       } 
     }
   </style>
@@ -113,7 +138,7 @@
   </div>
   <script>
 
-    const animations =['blink', 'look-sideways', 'angry'];
+    const animations =['blink', 'look-sideways', 'angry', 'sad'];
 
     function animateAll(animationName){
       console.log("Animate "+animationName);
@@ -144,7 +169,7 @@
     }
 
     function removeAll(){
-      console.log("END")
+      console.log("END");
       animations.forEach(removeAnimation);
     }
 
@@ -160,31 +185,9 @@
       rightEyebrow.addEventListener("animationend", removeAll);
     }
 
-    function blink(){
-      animateAll("blink");
-    }
-    function angry(){
-      animateAll("angry");
-    }
-    function lookSideways(){
-      animateAll("look-sideways");
-    }
-
     function toggleAnimation(){
-      console.log("Random animation");
-      const randomValue = Math.random();
-      if(randomValue < 0.2){
-        lookSideways();
-        console.log("lookSideways");
-        return;
-      }
-      if(randomValue < 0.4){
-        angry();
-        console.log("angry");
-        return;
-      }
-      console.log("blink");
-      blink();
+      const animation = animations[Math.floor(Math.random() * animations.length)];
+      animateAll(animation);
     }
 
     setInterval(toggleAnimation, 4000);
